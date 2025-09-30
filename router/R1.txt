@@ -1,0 +1,31 @@
+enable
+configure terminal
+hostname R1
+interface GigabitEthernet0/0
+ip address 10.0.0.1 255.255.255.252
+no shutdown
+exit
+interface GigabitEthernet0/1
+ip address 192.168.1.1 255.255.255.0
+no shutdown
+exit
+! Konfigurasi Routing Static
+ip route 0.0.0.0 0.0.0.0 10.0.0.2
+! Konfigurasi OSPF Area 0
+router ospf 1
+network 10.0.0.0 0.0.0.3 area 0
+network 192.168.1.0 0.0.0.255 area 0
+exit
+! Konfigurasi Redistribute
+router ospf 1
+redistribute static subnets
+exit
+! Konfigurasi HSRP
+interface GigabitEthernet0/1
+standby 1 ip 192.168.1.254
+standby 1 priority 110
+standby 1 preempt
+standby 1 authentication cisco
+exit
+end
+write memory
