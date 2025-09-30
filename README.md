@@ -1,6 +1,5 @@
 # Infrastruktur-Jaringan-Dengan-OSPF-RIP-dan-HSRP
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Contributors](https://img.shields.io/badge/contributors-1-green.svg)
 ![Forks](https://img.shields.io/badge/forks-0-lightgrey.svg)
 ![Stars](https://img.shields.io/badge/stars-0-yellow.svg)
