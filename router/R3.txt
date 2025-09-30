@@ -1,0 +1,42 @@
+enable
+configure terminal
+hostname R3
+interface GigabitEthernet0/0
+ip address 20.0.0.2 255.255.255.252
+no shutdown
+exit
+interface GigabitEthernet0/1
+ip address 30.0.0.1 255.255.255.252
+no shutdown
+exit
+interface GigabitEthernet0/2
+ip address 192.168.2.1 255.255.255.0
+no shutdown
+exit
+! Konfigurasi OSPF Area 0
+router ospf 1
+network 20.0.0.0 0.0.0.3 area 0
+exit
+! Konfigurasi RIPV2
+router rip
+version 2
+network 30.0.0.0
+network 192.168.2.0
+no auto-summary
+exit
+! Konfigurasi Redistribute
+router ospf 1
+redistribute rip subnets
+exit
+router rip
+redistribute ospf 1 metric 1
+exit
+! Konfigurasi HSRP
+interface GigabitEthernet0/2
+standby 1 ip 192.168.2.254
+standby 1 priority 100
+standby 1 preempt
+standby 1 authentication cisco
+exit
+end
+write memory
