@@ -1,0 +1,20 @@
+enable
+configure terminal
+hostname Switch0
+! Konfigurasi VLAN
+vlan 10
+name CLIENTS
+exit
+vlan 20
+name SERVERS
+exit
+! Konfigurasi Interface
+interface range fastethernet 0/1-3
+switchport mode access
+switchport access vlan 10
+exit
+interface fastethernet 0/24
+switchport mode trunk
+exit
+end
+write memory
