@@ -1,0 +1,4 @@
+IP Address: 172.20.1.2
+Subnet Mask: 255.255.255.0
+Default Gateway: 40.0.0.1
+DNS Server: 8.8.8.8
