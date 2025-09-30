@@ -1,0 +1,32 @@
+enable
+configure terminal
+hostname R4
+interface GigabitEthernet0/0
+ip address 30.0.0.2 255.255.255.252
+no shutdown
+exit
+interface GigabitEthernet0/1
+ip address 40.0.0.1 255.255.255.252
+no shutdown
+exit
+! Konfigurasi RIPV2
+router rip
+version 2
+network 30.0.0.0
+network 40.0.0.0
+no auto-summary
+exit
+! Konfigurasi Redistribute
+router rip
+redistribute static metric 1
+exit
+! Konfigurasi NAT
+interface GigabitEthernet0/1
+ip nat outside
+exit
+interface GigabitEthernet0/0
+ip nat inside
+exit
+ip nat inside source static 172.20.1.2 110.24.12.0
+end
+write memory
