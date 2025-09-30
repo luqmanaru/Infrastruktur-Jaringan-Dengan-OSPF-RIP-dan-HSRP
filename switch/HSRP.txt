@@ -1,0 +1,20 @@
+enable
+configure terminal
+hostname Switch0
+! Konfigurasi HSRP pada Switch0
+interface vlan 10
+ip address 192.168.1.10 255.255.255.0
+standby 1 ip 192.168.1.254
+standby 1 priority 90
+standby 1 preempt
+standby 1 authentication cisco
+exit
+interface vlan 20
+ip address 192.168.2.10 255.255.255.0
+standby 1 ip 192.168.2.254
+standby 1 priority 90
+standby 1 preempt
+standby 1 authentication cisco
+exit
+end
+write memory
